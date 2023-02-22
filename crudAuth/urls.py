@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from tasks import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('signup/', views.signUp,name="signup"),
+    path('', views.home, name="index")
 ]
