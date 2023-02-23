@@ -18,11 +18,13 @@
         {% csrf_token %}
 
         {{form.as_p}}
-
+        
         <button>
             Send
         </button>
     </form>
+
+    <h2>{{message}}</h2>
 
     
 {% endblock %}
