@@ -34,10 +34,22 @@ def signUp(request):
 
         return render(request, 'sign-up.html', {'form': UserCreationForm, 'message': 'Passwords doesnt match'})
 
+def projects(request):
+
+    return render(request, 'projects/projects.html')
+
+def create_project(request):
+
+    return render(request, 'projects/create_project.html')
+
 
 def tasks(request):
 
-    return render(request, 'tasks.html')
+    return render(request, 'tasks/tasks.html')
+
+def create_task(request):
+
+    return render(request,'tasks/create_task.html')
 
 
 def signOut(request):
