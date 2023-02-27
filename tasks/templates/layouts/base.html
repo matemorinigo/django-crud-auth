@@ -13,12 +13,22 @@
             <li>
                 <a href="{% url 'index' %}">HOME</a>
             </li>
-            <li>
-                <a href="{% url 'tasks' %}">TASKS</a>
-            </li>
+            
             {% if user.is_authenticated %}
                 <li>
+                    <a href="{% url 'tasks' %}">TASKS</a>
+                </li>
+                <li>
+                    <a href="{% url 'projects' %}">PROJECTS</a>
+                </li>
+                <li>
                     <a href="{% url 'logout' %}">LOGOUT</a>
+                </li>
+                <li>
+                    <a href="{% url 'create-project' %}">NEW PROJECT</a>
+                </li>
+                <li>
+                    <a href="{% url 'create-task' %}">NEW TASK</a>
                 </li>
             {% else %}
                 <li>
