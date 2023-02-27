@@ -5,7 +5,7 @@ from . import models
 class CreateNewTask(ModelForm):
     class Meta:
         model = models.Task
-        fields = ['task_name', 'task_description', 'task_isDone']
+        fields = ['task_name', 'task_description']
         
 class CreateNewProject(ModelForm):
     class Meta:

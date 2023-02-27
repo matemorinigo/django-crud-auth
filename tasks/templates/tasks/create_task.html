@@ -14,14 +14,34 @@
     
     <h1>Create task</h1>
 
+    <h2>{{message}}</h2>
+
+    {% if projects %}
+
     <form method="POST">
         {% csrf_token %}
 
         {{form.as_p}}
 
+        <select name="task_project" required="">    
+            {% for project in projects %}
+
+            <option value="{{project.id}}">
+                {{project.project_name}}
+            </option>
+
+            {% endfor %}
+        </select>
+
         <button>Send</button>
     </form>
 
+    {% else %}
+
+    <h2>Create a new project</h2>
+    <a href="{% url 'create-project' %}">HERE</a>
+
+    {% endif %}
 
     {% endblock %}
 </body>

@@ -11,6 +11,8 @@
     <title>Task {{task.task_name}}</title>
 </head>
 <body>
+
+    <h1>{{message}}</h1>
     
     <h1>Task {{task.task_name}}</h1>
 
@@ -20,8 +22,20 @@
         {% csrf_token %}
         {{updateForm.as_p}}
 
+        <select name="task_project" required="">    
+            {% for project in projects %}
+
+            <option value="{{project.id}}">
+                {{project.project_name}}
+            </option>
+
+            {% endfor %}
+        </select>
+
         <button>Update</button>
     </form>
+
+    
 
     {% endblock %}
 </body>

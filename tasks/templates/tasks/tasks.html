@@ -15,16 +15,75 @@
 
     <h1>Tasks</h1>
 
+    {% if filter == "All" %}
+
+    <h2>All Tasks</h2>
+
+    {% else %}
+
+        {% if filter == "True" %}
+
+            <h2> Tasks Completed </h2>
+
+        {% elif filter == "False" %}
+
+            <h2> Tasks Pending </h2>
+
+        {% endif %}
+
+    {% endif %}    
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <select name="filterby">
+            <option value="">
+                All
+            </option>
+            <option value=True>
+                Done
+            </option>
+            <option value=False>
+                Pending
+            </option>
+        </select>
+
+        <button> Filter </button>
+
+    </form>
+
     {% if tasks %}
     <ul>
         {% for task in tasks %}
         <li>
         <card>
-            <p>{{task.task_name}}</p>
+            <a href="{% url 'task-detail' task.id %}">{{task.task_name}}</a>
             <p>{{task.task_description}}</p>
+            {% if task.task_isDone == True %}
+
+                <h3>Task Completed</h3>
+
+            {% elif task.task_isDone == False %}
+
+                <h3>Task Pending</h3>
+
+            {% endif %}
+
+            <form action="{% url 'task-complete' task.id %}", method="POST">
+                {% csrf_token %}
+                <button>Complete</button>
+            </form>
+        
+            <form action="{% url 'task-delete' task.id %}", method="POST">
+                {% csrf_token %}
+                <button>Delete</button>
+            </form>
 
         </card>
         </li>
+        
+
+
         {% endfor %}
     </ul>
     {% else %}
