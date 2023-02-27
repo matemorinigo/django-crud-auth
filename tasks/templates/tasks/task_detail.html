@@ -8,18 +8,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Project</title>
+    <title>Task {{task.task_name}}</title>
 </head>
 <body>
     
-    <h1>Create Project</h1>
+    <h1>Task {{task.task_name}}</h1>
+
+    <h2>Update Task</h2>
 
     <form method="POST">
         {% csrf_token %}
+        {{updateForm.as_p}}
 
-        {{form.as_p}}
-
-        <button>Send</button>
+        <button>Update</button>
     </form>
 
     {% endblock %}

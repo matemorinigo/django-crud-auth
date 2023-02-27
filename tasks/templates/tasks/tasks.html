@@ -15,6 +15,25 @@
 
     <h1>Tasks</h1>
 
+    {% if tasks %}
+    <ul>
+        {% for task in tasks %}
+        <li>
+        <card>
+            <p>{{task.task_name}}</p>
+            <p>{{task.task_description}}</p>
+
+        </card>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+
+        <h2>0 Tasks :D</h2>
+
+    {% endif %}
+
+
     {% endblock %}
 </body>
 </html>
