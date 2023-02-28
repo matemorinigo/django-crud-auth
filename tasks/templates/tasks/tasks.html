@@ -4,95 +4,105 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasks</title>
 </head>
+
 <body>
-    
 
-    <h1>Tasks</h1>
+    <main>
 
-    {% if filter == "All" %}
+        <h1 class="display-3 text-center">Tasks</h1>
 
-    <h2>All Tasks</h2>
+        {% if filter == "All" %}
 
-    {% else %}
+        <h4 class="alert alert-success text-center" role="alert">Showing all Tasks</h2>
 
-        {% if filter == "True" %}
+            {% else %}
 
-            <h2> Tasks Completed </h2>
+            {% if filter == "True" %}
 
-        {% elif filter == "False" %}
+            <h4 class="alert alert-success text-center" role="alert"> Showing tasks Completed </h2>
 
-            <h2> Tasks Pending </h2>
+                {% elif filter == "False" %}
 
-        {% endif %}
+                <h4 class="alert alert-success text-center" role="alert"> Showing tasks Pending </h2>
 
-    {% endif %}    
+                    {% endif %}
 
-    <form method="POST">
-        {% csrf_token %}
+                    {% endif %}
 
-        <select name="filterby">
-            <option value="">
-                All
-            </option>
-            <option value=True>
-                Done
-            </option>
-            <option value=False>
-                Pending
-            </option>
-        </select>
+                    <form method="POST">
+                        {% csrf_token %}
 
-        <button> Filter </button>
+                        <select class="btn btn-outline-secondary dropdown-toggle" name="filterby">
+                            <option value="">
+                                All
+                            </option>
+                            <option value=True>
+                                Completed
+                            </option>
+                            <option value=False>
+                                Pending
+                            </option>
+                        </select>
 
-    </form>
+                        <button class="btn btn-outline-secondary"> Filter </button>
 
-    {% if tasks %}
-    <ul>
-        {% for task in tasks %}
-        <li>
-        <card>
-            <a href="{% url 'task-detail' task.id %}">{{task.task_name}}</a>
-            <p>{{task.task_description}}</p>
-            {% if task.task_isDone == True %}
+                    </form>
 
-                <h3>Task Completed</h3>
+                    {% if tasks %}
+                    <ul>
+                        {% for task in tasks %}
+                        <li>
+                            <card>
+                                <a href="{% url 'task-detail' task.id %}">{{task.task_name}}</a>
+                                <p>{{task.task_description}}</p>
+                                {% if task.task_isDone == True %}
 
-            {% elif task.task_isDone == False %}
+                                <h3>Task Completed</h3>
 
-                <h3>Task Pending</h3>
+                                {% elif task.task_isDone == False %}
 
-            {% endif %}
+                                <h3>Task Pending</h3>
 
-            <form action="{% url 'task-complete' task.id %}", method="POST">
-                {% csrf_token %}
-                <button>Complete</button>
-            </form>
-        
-            <form action="{% url 'task-delete' task.id %}", method="POST">
-                {% csrf_token %}
-                <button>Delete</button>
-            </form>
+                                {% endif %}
 
-        </card>
-        </li>
-        
+                                <form action="{% url 'task-complete' task.id %}" , method="POST">
+                                    {% csrf_token %}
+                                    <button>Complete</button>
+                                </form>
+
+                                <form action="{% url 'task-delete' task.id %}" , method="POST">
+                                    {% csrf_token %}
+                                    <button>Delete</button>
+                                </form>
+
+                            </card>
+                        </li>
 
 
-        {% endfor %}
-    </ul>
-    {% else %}
 
-        <h2>0 Tasks :D</h2>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
 
-    {% endif %}
+                    <div class="container py-5">
+                        <h2 class="alert alert-warning d-flex  justify-content-center" role="alert">0 Tasks :D</h2>
+                    </div>
+
+
+                    {% endif %}
+
+    </main>
+
 
 
     {% endblock %}
 </body>
+
 </html>

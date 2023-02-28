@@ -10,16 +10,33 @@
     <title>Sign In</title>
 </head>
 <body>
-    <form method="POST">
-        {% csrf_token %}
 
-        {{form.as_p}}
+    <main class="container">
 
-        <button> Send</button>
+        <div class="text-center">
+            <h1 class="display-3 text-center">Login</h1>
+        </div>
 
-    </form>
+        <form method="POST">
+            {% csrf_token %}
+    
+            <div class="mb-3">
 
-    <h2>{{message}}</h2>
+                <label for="username">User</label>
+                <input type="text" name="username" id="username" placeholder="Username" class="form-control">
+
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Password" class="form-control">
+
+            </div>
+    
+            <button class="btn btn-outline-secondary">Log in</button>
+    
+        </form>
+    
+        <h2>{{message}}</h2>
+    </main>
+    
 
 
     {% endblock %}

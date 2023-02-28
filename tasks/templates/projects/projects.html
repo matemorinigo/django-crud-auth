@@ -12,17 +12,33 @@
 </head>
 <body>
     
-    <h1>Projects</h1>
+    
 
+    <h1 class="display-3 text-center">Projects</h1>
+
+
+    <div class="d-flex p-2 justify-content-center">
     {% if projects %}
-    <ul>
+    <ul class="list-group " style="width: 20rem;">
         {% for project in projects %}
-        <li>
-        <card>
-            <a href="{% url 'project-detail' project.id %}">{{project.project_name}}</a>
-            <p>{{project.project_description}}</p>
 
-        </card>
+        
+        <li class="list-group-item bg-primary-subtle" >
+
+            <div style="width: 18rem;">
+                <div class="card-body">
+                  <a class="card-title text-success" href="{% url 'project-detail' project.id %}">{{project.project_name}}</a>
+                  <h6 class="card-subtitle mb-2 text-">description</h6>
+                  <p class="card-text text-success-emphasis">{{project.project_description}}</p>
+                </div>
+
+                <button class="btn btn-outline-success btn-sm d-flex justify-content-right" style="float:right; margin: right 0;" action="{% url 'project-delete' project.id %}"> 
+                
+                    Delete
+
+                </button>
+
+              </div>
         </li>
         {% endfor %}
     </ul>
@@ -31,6 +47,7 @@
         <h2>0 Projects :D</h2>
 
     {% endif %}
+    </div>
 
     {% endblock %}
 </body>

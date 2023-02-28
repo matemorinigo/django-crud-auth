@@ -24,7 +24,7 @@ def signUp(request):
         })
 
     else:
-        if request.POST['password1'] == request.POST['password2']:
+        if request.POST['password1'] == request.POST['password2'] and request.POST['password1'] != '':
             try:
                 user = User.objects.create_user(
                     username=request.POST['username'], password=request.POST['password1'])
@@ -111,7 +111,7 @@ def project_detail(request, project_id):
             return render(request, 'projects/project_detail.html', {
                 'project': project,
                 'updateForm': updateForm,
-                'message': 'Error'
+                'message': 'Algo salio mal'
             })
 
 @login_required
@@ -196,7 +196,7 @@ def task_detail(request, task_id):
             'task': task,
             'projects':projects,
             'updateForm': updateForm,
-            'message': 'Error'})
+            'message': 'Algo salio mal'})
     
 @login_required
 def task_complete(request, task_id):
@@ -217,3 +217,10 @@ def task_delete(request, task_id):
         task.delete()
 
         return redirect('tasks')
+    
+def project_delete(request, project_id):
+    project = get_object_or_404(models.Project, pk=project_id, project_user=request.user)
+    if request.method == 'POST':
+        project.delete()
+
+        return redirect('projects')

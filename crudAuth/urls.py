@@ -29,6 +29,7 @@ urlpatterns = [
     path('projects/', views.projects, name="projects"),
     path('projects/create', views.create_project, name="create-project"),
     path('projects/<int:project_id>', views.project_detail, name="project-detail"),
+    path('projects/<int:project_id>/delete', views.project_delete, name="project-delete"),
     path('logout/', views.signOut, name="logout"),
     path('login/', views.signIn, name="login")
 ]
